@@ -12,21 +12,20 @@ import com.netease.server.example.factory.ServiceFactory;
 import com.netease.server.example.meta.User;
 import com.netease.server.example.service.UserService;
 
-/**
- *
- *
- */
-public class UserServlet extends HttpServlet {
-	private static final long serialVersionUID = 4607606190625660785L;
+public class AllServlet extends HttpServlet {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8792122299450149693L;
 	/**
 	 * Logger for this class.
 	 */
-	private static Logger logger = Logger.getLogger(UserServlet.class);
+	private static Logger logger = Logger.getLogger(AllServlet.class);
 
 	@Override
 	public void init() throws ServletException {
-		logger.info("UserServlet init method is invoked.");
+		logger.info("AllServlet init is invoked.");
 	}
 
 	@Override
@@ -38,13 +37,7 @@ public class UserServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		logger.info("UserServlet post method is invoked.");
 		process(request, response);
-	}
-
-	@Override
-	public void destroy() {
-		logger.info("UserServlet destroy method is invoked.");
 	}
 
 	protected void process(HttpServletRequest request,
@@ -59,8 +52,6 @@ public class UserServlet extends HttpServlet {
 		u.setUserName(userName);
 		u.setUserPassword(userPassword);
 
-		String value = this.getInitParameter("tomcat");
-
 		try {
 			User user = userService.getUserByAccount(u);
 			if (user != null) {
@@ -70,9 +61,7 @@ public class UserServlet extends HttpServlet {
 				writer.println("<body>");
 				writer.println("<p>用户名：" + user.getUserName() + "</p>");
 				writer.println("<p>用户说明：" + user.getUserDesc() + "</p>");
-				if (value != null) {
-					writer.println("<p>初始化参数 tomcat的 value值：" + value + "</p>");
-				}
+				writer.println("<p>用户说明：这是全匹配servlet</p>");
 				writer.println("</body>");
 				writer.println("</html>");
 				writer.close();

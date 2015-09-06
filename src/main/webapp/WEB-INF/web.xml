@@ -8,12 +8,34 @@
 	<servlet>
 		<servlet-name>user</servlet-name>
 		<servlet-class>com.netease.server.example.web.controller.UserServlet</servlet-class>
+		<init-param>
+			<param-name>tomcat</param-name>
+			<param-value>test for init-param</param-value>
+		</init-param>
+		<load-on-startup>0</load-on-startup>
 	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>user</servlet-name>
+		<url-pattern>/user/specify</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>allUser</servlet-name>
+		<servlet-class>com.netease.server.example.web.controller.AllServlet</servlet-class>
+		<init-param>
+			<param-name>tomcat</param-name>
+			<param-value>test for init-param</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>allUser</servlet-name>
 		<url-pattern>/user/*</url-pattern>
 	</servlet-mapping>
+
 
 	<filter>
 		<filter-name>Set UTF-8</filter-name>
@@ -34,4 +56,13 @@
 		<filter-name>RequestIdFilter</filter-name>
 		<url-pattern>/user/*</url-pattern>
 	</filter-mapping>
+
+	<listener>
+		<listener-class>com.netease.server.example.web.controller.listener.TestListener</listener-class>
+	</listener>
+
+	<error-page>
+		<error-code>404</error-code>
+		<location>/error.html</location>
+	</error-page>
 </web-app>
